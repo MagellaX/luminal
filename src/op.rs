@@ -265,7 +265,9 @@ pub struct Recip;
 #[cfg(feature = "legacy_prims")]
 impl Operator for Recip {
     fn process(&mut self, inp: Vec<(InputTensor, ShapeTracker)>) -> Vec<Tensor> {
-        vec![Tensor::new(get_vec(&inp[0].0).iter().map(|&a| a.recip()).collect())]
+        vec![Tensor::new(
+            get_vec(&inp[0].0).iter().map(|&a| a.recip()).collect::<Vec<_>>(),
+        )]
     }
 }
 
@@ -276,7 +278,9 @@ pub struct Sqrt;
 #[cfg(feature = "legacy_prims")]
 impl Operator for Sqrt {
     fn process(&mut self, inp: Vec<(InputTensor, ShapeTracker)>) -> Vec<Tensor> {
-        vec![Tensor::new(get_vec(&inp[0].0).iter().map(|&a| a.sqrt()).collect())]
+        vec![Tensor::new(
+            get_vec(&inp[0].0).iter().map(|&a| a.sqrt()).collect::<Vec<_>>(),
+        )]
     }
 }
 
@@ -310,7 +314,7 @@ impl Operator for Mul {
                 .iter()
                 .zip(get_vec(&inp[1].0).iter())
                 .map(|(&a, &b)| a * b)
-                .collect(),
+                .collect::<Vec<_>>(),
         )]
     }
 }

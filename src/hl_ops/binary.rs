@@ -74,7 +74,11 @@ impl Mul for GraphTensor {
     /// Element-wise multiplication implemented without the `Mul` primitive.
     /// Uses the identity `a * b = 2^{log2(a) + log2(b)}`.
     fn mul(self, rhs: GraphTensor) -> Self::Output {
-        assert_eq!(self.dims(), rhs.dims(), "Dims must match to multiply tensors.");
+        assert_eq!(
+            self.dims(),
+            rhs.dims(),
+            "Dims must match to multiply tensors."
+        );
         (self.log2() + rhs.log2()).exp2()
     }
 }
@@ -98,7 +102,11 @@ impl Div<GraphTensor> for GraphTensor {
     type Output = GraphTensor;
 
     fn div(self, rhs: GraphTensor) -> Self::Output {
-        assert_eq!(self.dims(), rhs.dims(), "Dims must match to divide tensors.");
+        assert_eq!(
+            self.dims(),
+            rhs.dims(),
+            "Dims must match to divide tensors."
+        );
         (self.log2() - rhs.log2()).exp2()
     }
 }
@@ -200,13 +208,7 @@ impl<S: Into<Expression>> Div<S> for GraphTensor {
     type Output = GraphTensor;
 
     fn div(self, rhs: S) -> Self::Output {
-        (self.log2()
-            - self
-                .graph()
-                .constant(rhs)
-                .expand(self.shape)
-                .log2())
-        .exp2()
+        (self.log2() - self.graph().constant(rhs).expand(self.shape).log2()).exp2()
     }
 }
 
