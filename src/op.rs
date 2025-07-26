@@ -266,7 +266,10 @@ pub struct Recip;
 impl Operator for Recip {
     fn process(&mut self, inp: Vec<(InputTensor, ShapeTracker)>) -> Vec<Tensor> {
         vec![Tensor::new(
-            get_vec(&inp[0].0).iter().map(|&a| a.recip()).collect::<Vec<_>>(),
+            get_vec(&inp[0].0)
+                .iter()
+                .map(|&a| a.recip())
+                .collect::<Vec<_>>(),
         )]
     }
 }
@@ -279,7 +282,10 @@ pub struct Sqrt;
 impl Operator for Sqrt {
     fn process(&mut self, inp: Vec<(InputTensor, ShapeTracker)>) -> Vec<Tensor> {
         vec![Tensor::new(
-            get_vec(&inp[0].0).iter().map(|&a| a.sqrt()).collect::<Vec<_>>(),
+            get_vec(&inp[0].0)
+                .iter()
+                .map(|&a| a.sqrt())
+                .collect::<Vec<_>>(),
         )]
     }
 }
