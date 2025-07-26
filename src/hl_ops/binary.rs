@@ -204,6 +204,7 @@ impl Div<f32> for GraphTensor {
     }
 }
 
+#[allow(clippy::suspicious_arithmetic_impl)]
 impl<S: Into<Expression>> Div<S> for GraphTensor {
     type Output = GraphTensor;
 
